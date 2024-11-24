@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+body {
+  font-family: Montserrat, serif;
+  background: radial-gradient(#8e40ed 1%, #1f073b 56%);
+}
+
+.text-button {
+  font-family: Montserrat, serif;
+}
+
+p, h2, h3, h5 {
+  color: rgb(14, 240, 44);
+}
+
+h4, h1,
+.p-text-film {
+  color: rgba(148, 231, 159, 0.914);
+}
+
+h6 {
+  color: rgba(148, 231, 159, 0.914);
+}
+
+a {
+  color: rgba(148, 231, 159, 0.914);
+}
+
+/* навигационная панель */
+
+.navbar {
+  display: flex;
+  background: linear-gradient(90deg, #8e40ed 1%, #1f073b 98%);
+}
+
+.nav-list {
+  display: flex;
+
+}
+
+.nav-list a {
+  display: block;
+  padding: 1em;
+  text-decoration: none;
+  color: rgba(148, 231, 159, 0.914);
+}
+
+.nav-list a:hover {
+  background: linear-gradient(90deg, #8e40edbb 1%, #1a0632c5 98%);
+}
+
+.nav-btn {
+  display: none;
+}
+
+.navbar img {
+  width: 60px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 7px;
+}
+
+@media (max-width: 755px){
+  .nav-btn {
+    font-size: 2em;
+    padding-inline: 10px;
+    padding-bottom: 2px;
+    border: none;
+    background-color: #1f073b;
+    color: rgba(148, 231, 159, 0.914);
+    display: block;
+    cursor: pointer;
+  }
+  .nav-list {
+    display: none;
+  }
+  .drop:hover .nav-list {
+    display: block;
+    position: absolute;
+    right: 1px;
+    background: #8e40ed;
+    z-index: 1;
+  }
+  .navbar {
+    justify-content: space-between;
+  }
+}
+
+
+/*  */
+
+.sidebar {
+  color: rgb(14, 240, 44);
+  background: linear-gradient(90deg, #8e40ed 1%, #1f073b 98%);
+  padding: 10px;
+}
+
+.carousel-inner {
+  background: radial-gradient(#56c27f9f 0%, #1f073b86 89%);
+}
+
+.card {
+  background: linear-gradient(90deg, #8e40ed 1%, #1f073b 98%);
+  color: rgb(14, 240, 44);
+}
+
+.card a {
+  text-decoration: none;
+  color: rgb(14, 240, 44);
+}
+
+.slide-text,
+.footer-text {
+  color: rgb(14, 240, 44);
+  margin: auto auto;
+}
+
+footer {
+  background: linear-gradient(270deg, #8e40ed 1%, #1f073b 98%);
+}
+
+.btn-outline-primary {
+  background: linear-gradient(270deg, #8e40ed 1%, #1f073b 98%);
+  font-size: 50px;
+  color: rgb(14, 240, 44);
+  border-color: rgb(14, 240, 44);
+}
+
+.media-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.call-anim {
+  animation: call 5s ease 0s infinite reverse forwards;
+}
+
+@keyframes call {
+	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	100% {
+		opacity: 0;
+		transform: scale(0.6);
+	}
+}
+
+@media (max-width: 755px) {
+  .carousel-indicators {
+    display: none;
+  }
+  .img-fluid {
+    width: 120px;
+  }
+  
+}
+
+/* коллекции */
+
+.genre {
+  margin-bottom: 40px;
+}
+.genre-title {
+  font-size: 40px;
+  margin-bottom: 30px;
+  color: rgb(96, 238, 115);
+}
+.card-container {
+  z-index: 2;
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+.card {
+  min-width: 420px;
+  height: 280px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border-color: #285d3c;
+  border-width: 1px;
+  background: radial-gradient(#a356c276 0%, #1f073b85 89%);
+}
+
+.card-text{
+  font-size: 11px;
+  color: rgba(148, 231, 159, 0.914);
+}
+
+.card-title {
+  font-size: 18px;
+  color: rgba(148, 231, 159, 0.914);
+  width: 100%;
+  height: 100%;
+}
+
+.card-container::-webkit-scrollbar {
+  height: 10px;
+}
+
+.card-container::-webkit-scrollbar-thumb {
+  background-color: #285d3c;
+  border-radius: 5px;
+}
+
+.card-container::-webkit-scrollbar-track {
+  background: #1f073b;
+}
+
