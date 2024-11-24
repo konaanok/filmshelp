@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    
+    <link rel="stylesheet" href=" registration.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Регистрация</h2>
+        <form action="/register" method="post">
+            <label for="username">Имя пользователя:</label><br>
+            <input type="text" id="username" name="username" required><br>
+            
+            <label for="email">Электронная почта:</label><br>
+            <input type="email" id="email" name="email" required><br>
+            
+            <label for="password">Пароль:</label><br>
+            <input type="password" id="password" name="password" required minlength="8"><br>
+
+            <label for="confirm_password">Подтвердите пароль:</label><br>
+            <input type="password" id="confirm_password" name="confirm_password" required minlength="8"><br>
+
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+    </div>
+</body>
+</html>
