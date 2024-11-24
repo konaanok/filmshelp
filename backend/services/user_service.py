@@ -1,6 +1,7 @@
-import asyncpg
+from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from auth_utils import get_password_hash, verify_password
+from database.db_connection import get_database_connection
 from repositories.user_repository import UserRepository
 from schemas.user_schema import UserCreate
 
@@ -14,23 +15,6 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-async def get_database_connection():
-    return await asyncpg.connect(
-        host='localhost',
-        port=5432,
-        user='postgres',
-        password='12345',
-        database='postgres'
-)
-
-async def authenticate_user(email: str, password: str):
-    conn = await get_database_connection()
-    query = 'SELECT * FROM "user" WHERE "email" = $1'
-    user_record = await conn.fetchrow(query, email)
-    await conn.close()
-    if user_record and verify_password(password, user_record["hashed_password"]):
-        return {"email": user_record["email"]}
-    return None
 
 class UserService:
     def __init__(self, db: AsyncSession):
@@ -41,4 +25,12 @@ class UserService:
         await self.user_repository.create_user(user, hashed_password)
         
         return "User registered successfully"
+    
+    async def authenticate_user(self, email: str, password: str) -> Optional[dict]:
+        user = await self.user_repository.get_user_by_email(email)
+        if not user:
+            return None
+        if verify_password(password, user["hashed_password"]):
+            return {"id": user["id"], "email": user["email"]}
+        return None
     
