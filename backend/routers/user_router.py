@@ -5,7 +5,7 @@ from fastapi import APIRouter
 from database.database import get_user_db
 
 from schemas.user_schema import LoginRequest, MessageResponse, Token, UserCreate
-from services.user_service import UserService, authenticate_user
+from services.user_service import UserService
 from auth_utils import create_access_token
 
 auth_router = APIRouter()
@@ -21,14 +21,14 @@ async def create_user(user: UserCreate, db: AsyncSession = Depends(get_user_db))
  
 @auth_router.post("/login", response_model=Token)
 async def login(form_data: LoginRequest, db: AsyncSession = Depends(get_user_db)):
-    user = await authenticate_user(form_data.email, form_data.password)
+    user_service = UserService(db)
+    user = await user_service.authenticate_user(form_data.email, form_data.password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password",
-            headers={"WWW-Authenticate": "Cookie"},
+            headers={"WWW-Authenticate": "Bearer"},
         )
-
     access_token = create_access_token(data={"sub": user["email"]})
     return {"access_token": access_token, "token_type": "cookie"}
 
