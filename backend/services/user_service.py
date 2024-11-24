@@ -1,7 +1,6 @@
 from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from auth_utils import get_password_hash, verify_password
-from database.db_connection import get_database_connection
 from repositories.user_repository import UserRepository
 from schemas.user_schema import UserCreate
 
