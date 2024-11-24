@@ -1,8 +1,10 @@
+from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import insert, select
+from sqlalchemy import insert
 from models.user_model import user_table
 from schemas.user_schema import UserCreate
+from database.db_connection import get_database_connection
 
 
 class UserRepository:
@@ -21,4 +23,12 @@ class UserRepository:
         except IntegrityError:
             await self.db.rollback()
             raise ValueError("User with this email already exists")
-
+        
+    async def get_user_by_email(self, email: str) -> Optional[dict]:
+        conn = await get_database_connection()
+        try:
+            query = 'SELECT * FROM "user" WHERE "email" = $1'
+            user_record = await conn.fetchrow(query, email)
+            return dict(user_record) if user_record else None
+        finally:
+            await conn.close()
