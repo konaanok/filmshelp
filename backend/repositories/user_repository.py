@@ -1,7 +1,7 @@
 from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import insert
+from sqlalchemy import insert, select
 from models.user_model import user_table
 from schemas.user_schema import UserCreate
 from database.db_connection import get_database_connection
@@ -32,3 +32,9 @@ class UserRepository:
             return dict(user_record) if user_record else None
         finally:
             await conn.close()
+    
+    async def get_user_id_by_username(self, username: str) -> Optional[int]:
+        query = select(user_table.c.id).where(user_table.c.username == username)
+        result = await self.db.execute(query)
+        user = result.fetchone()
+        return user.id if user else None
