@@ -4,17 +4,6 @@ from auth_utils import get_password_hash, verify_password
 from repositories.user_repository import UserRepository
 from schemas.user_schema import UserCreate
 
-from passlib.context import CryptContext
-from fastapi.security import OAuth2PasswordBearer
-
-SECRET_KEY = "your-secret-key"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
 class UserService:
     def __init__(self, db: AsyncSession):
         self.user_repository = UserRepository(db)
