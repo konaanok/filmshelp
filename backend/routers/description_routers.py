@@ -7,7 +7,7 @@ from services.description_service import DescriptionService
 
 description_router = APIRouter()
 
-@description_router.get("/", response_model=List[DescriptionRead])
+@description_router.get("/descriptions", response_model=List[DescriptionRead])
 async def get_descriptions(director_names: List[str] = Query(..., description="Список имён режиссёров"), db: AsyncSession = Depends(get_film_db)):
     description_service = DescriptionService(db)
     descriptions = await description_service.get_description_by_directors(director_names)
