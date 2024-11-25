@@ -17,7 +17,7 @@ class FilmRating(BaseModel):
 class RatingResponse(BaseModel):
     username: str
     rating_user: float
-    review: str
+    review: Optional[str] = None
 
     class Config:
         orm_mode = True
