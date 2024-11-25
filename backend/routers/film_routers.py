@@ -1,4 +1,3 @@
-
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import List
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -8,7 +7,7 @@ from services.film_service import FilmService
 
 film_router = APIRouter()
 
-@film_router.get("/", response_model=List[FilmRead])
+@film_router.get("/films", response_model=List[FilmRead])
 async def get_films(description_name: str = Query(...), db: AsyncSession = Depends(get_film_db)):
     film_service = FilmService(db)
     films = await film_service.get_film_by_description(description_name)
