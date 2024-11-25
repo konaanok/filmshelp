@@ -43,12 +43,10 @@ async def validation_exception_handler(request:Request, exc: ValidationException
         content=jsonable_encoder({"detail": exc.errors()})
     )
 
-app.include_router(genre_router, prefix="/genres", tags=["genres"])
-app.include_router(director_router, prefix="/directors", tags=["directors"])
-app.include_router(description_router, prefix="/descriptions", tags=["descriptions"])
-app.include_router(film_router, prefix="/films", tags=["films"])
-
-
+app.include_router(genre_router, tags=["genres"])
+app.include_router(director_router, tags=["directors"])
+app.include_router(description_router, tags=["descriptions"])
+app.include_router(film_router, tags=["films"])
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
 
 # app.include_router(rating_router, prefix="/rating", tags=["rating"])
